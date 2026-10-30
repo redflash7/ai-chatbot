@@ -12,6 +12,17 @@
 python3 -m http.server 8000   # http://localhost:8000
 ```
 
+## 스마트폰에서 사용하기
+
+1. GitHub 저장소 **Settings → Pages**에서 Source를 *Deploy from a branch*, 브랜치 `ccr-427e4c82-jlbtqe` / `/ (root)`로 저장
+2. 1~2분 뒤 `https://redflash7.github.io/ai-chatbot/` 접속
+3. 홈 화면에 추가
+   - iPhone(Safari): 공유 버튼 → **홈 화면에 추가**
+   - Android(Chrome): ⋮ 메뉴 → **앱 설치** 또는 **홈 화면에 추가**
+
+홈 화면 아이콘으로 열면 앱처럼 전체 화면으로 실행되고, 한 번 연 뒤에는 오프라인에서도 동작합니다.
+기록은 그 휴대폰 안에만 저장되며 PC와 자동 동기화되지 않습니다(백업 파일로 옮길 수 있음).
+
 ## 기능
 
 - 달력으로 날짜를 선택해 그날의 기록 작성·조회 (기록이 있는 날은 종류별 색 점 표시)
@@ -22,6 +33,7 @@ python3 -m http.server 8000   # http://localhost:8000
 - `Ctrl/⌘ + Enter`로 빠르게 저장
 - JSON 백업 내보내기/불러오기 (같은 기록은 더 최근에 수정된 쪽으로 병합)
 - 다크 모드, 모바일 화면 지원, 여러 탭 간 자동 동기화
+- PWA: 홈 화면 설치, 오프라인 실행
 
 ## 데이터 저장
 

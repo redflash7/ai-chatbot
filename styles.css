@@ -328,15 +328,23 @@ dialog .composer-foot { justify-content: flex-end; }
 
 /* Mobile */
 @media (max-width: 800px) {
-  .app { grid-template-columns: 1fr; }
-  .sidebar {
-    position: static;
-    height: auto;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-    padding: 16px;
-  }
-  .main { padding: 20px 16px; }
+  /* 사이드바 항목을 풀어서 배치: 달력·검색 → 작성/목록 → 통계·백업 */
+  .app { display: flex; flex-direction: column; }
+  .sidebar { display: contents; }
+  .sidebar > *, .main { padding-left: 16px; padding-right: 16px; }
+  .brand { order: 1; padding-top: max(16px, env(safe-area-inset-top)); }
+  .calendar { order: 2; padding-top: 12px; }
+  .filters { order: 3; padding-top: 12px; }
+  .main { order: 4; padding-top: 8px; padding-bottom: 24px; }
+  .stats { order: 5; }
+  .backup { order: 6; padding-top: 12px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .brand .muted { display: none; }
+  .brand h1 { margin: 0; }
+  .cal-day { aspect-ratio: auto; height: 38px; }
+  .day-head h2 { font-size: 1.3rem; }
+  .composer { margin-top: 12px; }
+  /* iOS에서 입력창 포커스 시 자동 확대 방지 */
+  input, textarea { font-size: 16px; }
   .backup { flex-direction: row; }
   .backup .btn { flex: 1; }
   .composer-foot { flex-wrap: wrap; }

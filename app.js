@@ -520,5 +520,14 @@ window.addEventListener('storage', (ev) => {
   render();
 });
 
+// ---------- PWA ----------
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('sw.js').catch((err) => console.warn('서비스 워커 등록 실패', err));
+}
+
+// 브라우저가 저장 공간 부족 시 기록을 지우지 않도록 영구 저장을 요청한다
+navigator.storage?.persist?.().catch(() => {});
+
 bindEvents();
 render();
