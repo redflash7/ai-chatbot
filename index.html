@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>하루노트</title>
+  <meta name="description" content="매일의 아이디어, 메모, 일기를 기록하는 로컬 노트 앱">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <header class="brand">
+        <h1>하루노트</h1>
+        <p class="muted">모든 기록은 이 기기에만 저장됩니다</p>
+      </header>
+
+      <section class="calendar" aria-label="달력">
+        <div class="cal-head">
+          <button type="button" class="icon-btn" id="prevMonth" aria-label="이전 달">‹</button>
+          <strong id="calTitle"></strong>
+          <button type="button" class="icon-btn" id="nextMonth" aria-label="다음 달">›</button>
+        </div>
+        <div class="cal-grid cal-weekdays">
+          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="cal-grid" id="calDays"></div>
+        <button type="button" class="link-btn" id="todayBtn">오늘로 이동</button>
+      </section>
+
+      <section class="filters">
+        <input type="search" id="search" placeholder="전체 기록 검색 (제목·내용·#태그)" autocomplete="off">
+        <div class="chips" role="group" aria-label="종류 필터">
+          <button type="button" class="chip active" data-filter="all">전체</button>
+          <button type="button" class="chip" data-filter="idea">💡 아이디어</button>
+          <button type="button" class="chip" data-filter="memo">📝 메모</button>
+          <button type="button" class="chip" data-filter="diary">📔 일기</button>
+        </div>
+      </section>
+
+      <section class="stats" id="stats"></section>
+
+      <section class="backup">
+        <button type="button" class="btn ghost" id="exportBtn">백업 내보내기</button>
+        <label class="btn ghost">
+          백업 불러오기
+          <input type="file" id="importInput" accept="application/json,.json" hidden>
+        </label>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="day-head">
+        <div>
+          <h2 id="dayTitle"></h2>
+          <p class="muted" id="daySub"></p>
+        </div>
+      </header>
+
+      <form class="composer" id="composer">
+        <div class="type-tabs" role="radiogroup" aria-label="기록 종류">
+          <label><input type="radio" name="type" value="idea" checked><span>💡 아이디어</span></label>
+          <label><input type="radio" name="type" value="memo"><span>📝 메모</span></label>
+          <label><input type="radio" name="type" value="diary"><span>📔 일기</span></label>
+        </div>
+        <input type="text" name="title" placeholder="제목 (선택)" maxlength="120" autocomplete="off">
+        <textarea name="content" rows="4" placeholder="떠오른 생각을 적어보세요… (Ctrl+Enter로 저장)" required></textarea>
+        <div class="mood-row" hidden>
+          <span class="muted">오늘의 기분</span>
+          <div class="moods" role="radiogroup" aria-label="기분"></div>
+        </div>
+        <div class="composer-foot">
+          <input type="text" name="tags" placeholder="태그 (쉼표로 구분)" autocomplete="off">
+          <button type="submit" class="btn primary">저장</button>
+        </div>
+      </form>
+
+      <section id="list" class="list" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="editDialog">
+    <form method="dialog" id="editForm" class="composer">
+      <h3>기록 수정</h3>
+      <div class="type-tabs" role="radiogroup" aria-label="기록 종류">
+        <label><input type="radio" name="type" value="idea"><span>💡 아이디어</span></label>
+        <label><input type="radio" name="type" value="memo"><span>📝 메모</span></label>
+        <label><input type="radio" name="type" value="diary"><span>📔 일기</span></label>
+      </div>
+      <input type="date" name="date" required>
+      <input type="text" name="title" placeholder="제목 (선택)" maxlength="120" autocomplete="off">
+      <textarea name="content" rows="8" required></textarea>
+      <div class="mood-row" hidden>
+        <span class="muted">기분</span>
+        <div class="moods" role="radiogroup" aria-label="기분"></div>
+      </div>
+      <input type="text" name="tags" placeholder="태그 (쉼표로 구분)" autocomplete="off">
+      <div class="composer-foot">
+        <button type="button" class="btn ghost" id="editCancel">취소</button>
+        <button type="submit" class="btn primary" value="save">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
